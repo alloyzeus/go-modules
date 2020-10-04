@@ -1,5 +1,9 @@
 package telephony
 
+import (
+	"github.com/alloyzeus/go-azcore/azcore"
+)
+
 // A CountryCode holds information about country code.
 type CountryCode int32
 
@@ -11,6 +15,8 @@ type PhoneNumber struct {
 	countryCode    CountryCode
 	nationalNumber NationalNumber
 }
+
+var _ azcore.ValueObject = PhoneNumber{}
 
 // NewPhoneNumber returns a new instance of PhoneNumber with
 // the provided details.
@@ -65,5 +71,5 @@ func (pn PhoneNumber) Equal(other interface{}) bool { return pn.Equals(other) }
 // EqualsPhoneNumber returns true if the other instance has the same values as this.
 func (pn PhoneNumber) EqualsPhoneNumber(other PhoneNumber) bool {
 	return pn.countryCode == other.countryCode &&
-		pn.nationalNumber == pn.nationalNumber
+		pn.nationalNumber == other.nationalNumber
 }
